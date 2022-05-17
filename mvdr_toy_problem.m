@@ -26,18 +26,12 @@ noise=sqrt(1/2)*(randn(N,K)+1i*randn(N,K));  %Uncorrelated noise
 X=A*diag(sqrt(P))*sig+noise;   %Generate data matrix
 
 R = X*X'/K; % spatial covariance matrix 10x10
-
-[Q, D] = eig(R); %eigenvalues and vectors of cov matrix
-[D, I] = sort(diag(D),1,'descend');
-
-Q = Q(:,I); % sorts the eigenvectors to get signal first
-Qs = Q(:, 1:r); % signal eigenvectors
-Qr = Q(:,r+1:N); % noise eigenvectors
+%R = toeplitz(autocorr(X, N-1));
 
 IR = inv(R);
 
 % directions to look
-angles=(-90:0.1:90);
+angles=(-90:0.01:90);
 % steering vector to look
 a1=exp(-1i*2*pi*d*(0:N-1)'*sin(angles(:)'*pi/180));
 
