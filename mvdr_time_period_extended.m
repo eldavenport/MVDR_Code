@@ -70,3 +70,58 @@ set(gcf,'color','w')
 title('MVDR')
 ylim([-40 40])
 
+%%
+
+figure(2)
+subplot(1,3,1)
+imagesc(time_vector*2, angles, 20*log10(mvdr_338))
+set(gca,'ydir','normal'); colormap(jet);
+xlabel('Time (s)'); ylabel('Angle (deg)');
+a = colorbar;
+set(gcf,'color','w')
+ylabel(a,'MVDR Power (dB)','FontSize',10,'Rotation',270);
+a.Label.Position(1) = 3;
+title('MVDR, 338 Hz')
+ylim([-40 40])
+subplot(1,3,2)
+imagesc(time_vector*2, angles, 20*log10(mvdr_235))
+set(gca,'ydir','normal'); colormap(jet);
+xlabel('Time (s)'); ylabel('Angle (deg)');
+a = colorbar;
+set(gcf,'color','w')
+ylabel(a,'MVDR Power (dB)','FontSize',10,'Rotation',270);
+a.Label.Position(1) = 3;
+title('MVDR, 235 Hz')
+ylim([-40 40])
+subplot(1,3,3)
+imagesc(time_vector*2, angles, 20*log10(mvdr_112))
+set(gca,'ydir','normal'); colormap(jet);
+xlabel('Time (s)'); ylabel('Angle (deg)');
+a = colorbar;
+set(gcf,'color','w')
+ylabel(a,'MVDR Power (dB)','FontSize',10,'Rotation',270);
+a.Label.Position(1) = 3;
+title('MVDR, 112 Hz')
+ylim([-40 40])
+
+figure(3)
+subplot(1,2,1)
+imagesc(time_vector*2, angles, 20*log10(mvdr_112))
+set(gca,'ydir','normal'); colormap(jet);
+xlabel('Time (s)'); ylabel('Angle (deg)');
+a = colorbar;
+set(gcf,'color','w')
+ylabel(a,'MVDR Power (dB)','FontSize',10,'Rotation',270);
+a.Label.Position(1) = 3;
+title('MVDR, 112 Hz')
+ylim([-40 40])
+subplot(1,2,2)
+imagesc(time_vector*2, angles, 20*log10(mvdr_64))
+set(gca,'ydir','normal'); colormap(jet);
+xlabel('Time (s)'); ylabel('Angle (deg)');
+a = colorbar;
+set(gcf,'color','w')
+ylabel(a,'MVDR Power (dB)','FontSize',10,'Rotation',270);
+a.Label.Position(1) = 3;
+title('MVDR, 64 Hz')
+ylim([-40 40])
