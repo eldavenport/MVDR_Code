@@ -1,7 +1,10 @@
-%mvdr across time % MVDR Implementation
+% music 
 
 % R - spatial covariance matrix
+% r - expected number of sources
 % d0 - inter element spacing used to obtain R
+
+% R should obviously be square
 
 % ------------------------- OUR DATA ------------------------------------
 N = 64; % num elements
@@ -42,31 +45,37 @@ for time_index = start_time:window_length:length(samples)-window_length
     angles=(-90:.1:90);
     % steering vector to look
     a1=exp(-1i*2*pi*d*(0:N-1)'*(angles(:)'*pi/180));
-    
-    % inv(A)*b = A\b
 
-    for k = 1:length(angles)
-        mvdr(k,j) = 1/(a1(:,k)'*(R\a1(:,k)));
+    [Q, D] = eig(R); %eigenvalues and vectors of cov matrix
+    [D, I] = sort(diag(D),1,'descend');
+    
+    r = 4; % total number of signals
+    Q = Q(:,I); % sorts the eigenvectors to get signal first
+    Qs = Q(:, 1:r); % signal eigenvectors
+    Qn = Q(:,r+1:N); % noise eigenvectors
+
+    for k=1:length(angles)  %Compute MUSIC 
+        music(k,j)=(a1(:,k)'*a1(:,k))/(a1(:,k)'*(Qn*Qn')*a1(:,k));
     end
 
     j = j + 1;
 end 
 
 %% 
-[row,col] = size(mvdr);
+[row,col] = size(music);
 
 time_vector = 1:1:col;
 
 for i = 1:col
-    mvdr(:,i) = abs(mvdr(:,i)/max(mvdr(:,i)));
+    music(:,i) = abs(music(:,i)/max(music(:,i)));
 end
 
 figure(1)
-imagesc(time_vector, angles, (mvdr))
+imagesc(time_vector, angles, (music))
 set(gca,'ydir','normal'); colormap(jet);
 xlabel('Time'); ylabel('Angle');
 colorbar;
 set(gcf,'color','w')
-title('MVDR')
+title('MUSIC')
 ylim([-40 40])
 
