@@ -1,0 +1,22 @@
+Notes on Project
+
+Timing:
+
+window length = 3000 samples
+
+Music @ 338Hz: 54.051313 seconds (using toeplitz and autocorr)
+MVDR @ 338Hz:  75.895841 (using toeplitz and autocorr)
+
+more trials:
+
+mvdr:
+73.330141
+72.223622
+70.904701
+69.129681
+
+music:
+48.365481
+51.085951
+49.728675
+50.313300

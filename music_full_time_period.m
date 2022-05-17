@@ -18,12 +18,13 @@ samples = data.vlaAcoustic64.samples;
 
 window_length = 3000;
 nfft = 4096;
-desired_frequency = 64; % hz
+desired_frequency = 338; % hz
 bin_number = ceil(desired_frequency / (fs/nfft)); % desF / (hz/bin)
 start_time = 1;
 
 % filter for a specific frequency, then use that data
 j = 1;
+tic
 for time_index = start_time:window_length:length(samples)-window_length
     data_window = samples(time_index:time_index+window_length-1, :)';
 
@@ -58,6 +59,7 @@ for time_index = start_time:window_length:length(samples)-window_length
 
     j = j + 1;
 end 
+toc
 
 [row,col] = size(music);
 

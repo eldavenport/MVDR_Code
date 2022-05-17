@@ -11,18 +11,17 @@ spacing = 118/63;
 d = spacing/wavelength;
  
 data = load('vlaAcoustic64.mat');
-samples = data.vlaAcoustic64.samples;
-
-%% 
+samples = data.vlaAcoustic64.samples; 
 
 window_length = 3000;
 nfft = 4096;
-desired_frequency = 338; % hz
+desired_frequency = 112; % hz
 bin_number = ceil(desired_frequency / (fs/nfft)); % desF / (hz/bin)
 start_time = 1;
 
 % filter for a specific frequency, then use that data
 j = 1;
+tic
 for time_index = start_time:window_length:length(samples)-window_length
     data_window = samples(time_index:time_index+window_length-1, :)';
 
@@ -31,7 +30,7 @@ for time_index = start_time:window_length:length(samples)-window_length
         data_window(i,:) = data_window(i,:).*kaiser(window_length, 7.85)';
         data_fft(i,:) = fft(data_window(i,:),nfft,2);
     end
-%%
+
     % check this with a stem plot
     % add doppler shift compensation
     data_at_desired_bin = data_fft(:, bin_number); % 64x1
@@ -51,6 +50,7 @@ for time_index = start_time:window_length:length(samples)-window_length
 
     j = j + 1;
 end 
+toc
 
 %% 
 [row,col] = size(mvdr);
