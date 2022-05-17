@@ -68,7 +68,7 @@ for i = 1:col
 end
 
 figure(1)
-imagesc(time_vector, angles, 20*log10(mvdr))
+imagesc(time_vector, angles, (mvdr))
 set(gca,'ydir','normal'); colormap(jet);
 xlabel('Time'); ylabel('Angle');
 colorbar;
