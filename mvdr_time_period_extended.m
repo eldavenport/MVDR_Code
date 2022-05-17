@@ -31,8 +31,7 @@ for time_index = start_time:window_length:length(samples)-window_length
 
     % could add a kaiser window before doing this... 
     for i = 1:height(data_window)
-        %*kaiser(window_length, 7.85)
-        %data_window(i,:) = data_window(i,:);
+        data_window(i,:) = data_window(i,:).*kaiser(window_length, 7.85)';
         data_fft(i,:) = fft(data_window(i,:),nfft,2);
     end
 %%
