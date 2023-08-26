@@ -71,7 +71,7 @@ for time_index = start_time:window_length:length(samples)-window_length
     
     R = toeplitz(autocorr(data_at_desired_bin', N-1));
         
-    % directions to look, if we know aperature is 120, can we do 60 to 60
+    % look directions
     angles=(-90:.1:90);
     % steering vector to look
     a1=exp(-1i*2*pi*d*(0:N-1)'*(angles(:)'*pi/180));
@@ -205,7 +205,7 @@ for time_index = start_time:window_length:length(samples)-window_length
     
     R = toeplitz(autocorr(data_at_desired_bin', N-1));
         
-    % directions to look, if we know aperature is 120, can we do 60 to 60
+    % look directions
     angles=(-90:.1:90);
     % steering vector to look
     a1=exp(-1i*2*pi*d*(0:N-1)'*(angles(:)'*pi/180));
@@ -273,7 +273,7 @@ for time_index = start_time:window_length:length(samples)-window_length
     
     R = toeplitz(autocorr(data_at_desired_bin', N-1));
         
-    % directions to look, if we know aperature is 120, can we do 60 to 60
+    % look directions
     angles=(-90:.1:90);
     % steering vector to look
     a1=exp(-1i*2*pi*d*(0:N-1)'*(angles(:)'*pi/180));

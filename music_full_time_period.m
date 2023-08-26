@@ -1,10 +1,8 @@
 % music 
 
-% R - spatial covariance matrix
+% R - spatial cov matrix
 % r - expected number of sources
-% d0 - inter element spacing used to obtain R
-
-% R should obviously be square
+% d0 - spacing between elements
 
 % ------------------------- OUR DATA ------------------------------------
 N = 64; % num elements
@@ -22,7 +20,7 @@ desired_frequency = 338; % hz
 bin_number = ceil(desired_frequency / (fs/nfft)); % desF / (hz/bin)
 start_time = 1;
 
-% filter for a specific frequency, then use that data
+% filter for a specific frequency
 j = 1;
 tic
 for time_index = start_time:window_length:length(samples)-window_length
@@ -34,13 +32,12 @@ for time_index = start_time:window_length:length(samples)-window_length
         data_fft(i,:) = fft(data_window(i,:),nfft,2);
     end
 
-    % check this with a stem plot
     % add doppler shift compensation
     data_at_desired_bin = data_fft(:, bin_number); % 64x1
     
     R = toeplitz(autocorr(data_at_desired_bin', N-1));
         
-    % directions to look, if we know aperature is 120, can we do 60 to 60
+    % look directions
     angles=(-90:.1:90);
     % steering vector to look
     a1=exp(-1i*2*pi*d*(0:N-1)'*(angles(:)'*pi/180));

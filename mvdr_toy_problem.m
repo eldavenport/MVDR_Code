@@ -19,7 +19,7 @@ K = 3000;
 r = 2; % total number of signals
 
 A=exp(-1i*2*pi*d*(0:N-1)'*sin(doas(:)'));
-sig=round(rand(r,K))*2-1;   % Generate random BPSK symbols for each of the % r signals
+sig=round(rand(r,K))*2-1;
 noise=sqrt(1/2)*(randn(N,K)+1i*randn(N,K));  %Uncorrelated noise
 
 % ------------------------- OUR DATA ------------------------------------

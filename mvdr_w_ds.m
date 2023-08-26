@@ -1,7 +1,7 @@
 %mvdr across time % MVDR Implementation
 
-% R - spatial covariance matrix
-% d0 - inter element spacing used to obtain R
+% R - spatial cov matrix
+% d0 - element spacing used to obtain R
 
 
 % time comparison mvdr vs MUSIC 
@@ -47,7 +47,6 @@ for time_index = start_time:window_length:length(samples)-window_length
     
     data_window = samples(time_index:time_index+window_length-1, :)';
 
-    % could add a kaiser window before doing this... 
     for i = 1:size(data_window,1)
         data_window(i,:) = data_window(i,:).*kaiser(window_length, 7.85)';
         data_fft(i,:) = fft(data_window(i,:),nfft,2);
@@ -64,7 +63,7 @@ for time_index = start_time:window_length:length(samples)-window_length
     
     R = toeplitz(autocorr(data_at_desired_bin', N-1));
         
-    % directions to look, if we know aperature is 120, can we do 60 to 60
+    % look directions
     angles=(-90:.1:90);
     % steering vector to look
     a1=exp(-1i*2*pi*d*(0:N-1)'*(angles(:)'*pi/180));
@@ -114,7 +113,6 @@ for time_index = start_time:window_length:length(samples)-window_length
     
     data_window = samples(time_index:time_index+window_length-1, :)';
 
-    % could add a kaiser window before doing this... 
     for i = 1:size(data_window,1)
         data_window(i,:) = data_window(i,:).*kaiser(window_length, 7.85)';
         data_fft(i,:) = fft(data_window(i,:),nfft,2);
@@ -129,7 +127,7 @@ for time_index = start_time:window_length:length(samples)-window_length
     
     R = toeplitz(autocorr(data_at_desired_bin', N-1));
         
-    % directions to look, if we know aperature is 120, can we do 60 to 60
+    % look directions
     angles=(-90:.1:90);
     % steering vector to look
     a1=exp(-1i*2*pi*d*(0:N-1)'*(angles(:)'*pi/180));
